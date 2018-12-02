@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour {
 	int playerId = 0; // The Rewired player id of this character
 	private Player player; // The Rewired Player
 	Rigidbody2D rb;
+	GameObject spriteContainer;
+	SpriteRenderer sr;
 
 	public GameObject arrow;
 
@@ -30,6 +32,8 @@ public class PlayerController : MonoBehaviour {
 	public float arrowVelocity;
 	public float moveDirection;
 
+	bool upperHemisphere = true;
+
 	bool canMove = false;
 
 	Vector2 startVector;
@@ -45,7 +49,10 @@ public class PlayerController : MonoBehaviour {
 	void Start () {
 		// Get the Rewired Player object for this player and keep it for the duration of the character's lifetime
         player = ReInput.players.GetPlayer(playerId);
-		
+
+		spriteContainer = transform.GetChild(1).gameObject;
+		sr = spriteContainer.GetComponent<SpriteRenderer>();
+
 		rb = GetComponent<Rigidbody2D>();
 		startVector = transform.position;
 
@@ -79,12 +86,20 @@ public class PlayerController : MonoBehaviour {
 
 		if ((player.GetNegativeButtonUp("Move") || player.GetButtonUp("Move"))) {
 			rb.velocity = new Vector2(0f,0f);
+
+			if (transform.position.y > worldCenter.transform.position.y) {
+				upperHemisphere = true;
+			}
+
+			else {
+				upperHemisphere = false;
+			}
 	
 		}
 
 		else if (moveDirection == 0 && playerTrigger.onGround) {
 			rb.velocity = new Vector2(0f,0f);
-	
+			print("Zero");
 		}
 
 		/***********************
@@ -97,15 +112,33 @@ public class PlayerController : MonoBehaviour {
 
 			// Vector2 right = transform.right;
 
-			rb.velocity = transform.right * moveSpeed;
-			// rb.velocity = Vector2.right;
+			if (upperHemisphere) {
+				rb.velocity = transform.right * moveSpeed;
+				spriteContainer.transform.localScale = new Vector2(Mathf.Abs(spriteContainer.transform.localScale.x), spriteContainer.transform.localScale.y);
+			
+			}
+			else { 
+				rb.velocity = transform.right * -moveSpeed;
+				spriteContainer.transform.localScale = new Vector2(-Mathf.Abs(spriteContainer.transform.localScale.x), spriteContainer.transform.localScale.y);
+			}
+			
+			// if (!playerTrigger.onGround) UseGravity();
 
-			// Debug.DrawRay(transform.position, transform.right, Color.red, 1000f);
 		}
 
 		else if (player.GetNegativeButton("Move") && canMove) {
 			
-			rb.velocity = transform.right * -moveSpeed;
+			if (upperHemisphere) {
+				rb.velocity = transform.right * -moveSpeed;
+				spriteContainer.transform.localScale = new Vector2(-Mathf.Abs(spriteContainer.transform.localScale.x), spriteContainer.transform.localScale.y);
+			
+			}
+			else { 
+				rb.velocity = transform.right * moveSpeed;
+				spriteContainer.transform.localScale = new Vector2(Mathf.Abs(spriteContainer.transform.localScale.x), spriteContainer.transform.localScale.y);
+			}
+
+			// if (!playerTrigger.onGround) UseGravity();
 			
 		}
 
@@ -131,10 +164,18 @@ public class PlayerController : MonoBehaviour {
 
 	IEnumerator ShootArrow () {
 		GameObject spawnedArrow = (GameObject) Instantiate(arrow, transform.position, Quaternion.identity);
-		spawnedArrow.GetComponent<Rigidbody2D>().velocity = transform.right * arrowVelocity;
+	
+		if (spriteContainer.transform.localScale.x > 0) {
+			spawnedArrow.GetComponent<Rigidbody2D>().velocity = transform.right * arrowVelocity;
+		}
+
+		else if (spriteContainer.transform.localScale.x < 0) {
+			spawnedArrow.GetComponent<Rigidbody2D>().velocity = -transform.right * arrowVelocity;
+		}
+
 		canMove = false;
 
-		yield return new WaitForSeconds(0.1f);
+		yield return new WaitForSeconds(0.2f);
 
 		spawnedArrow.GetComponent<CapsuleCollider2D>().enabled = true;
 
