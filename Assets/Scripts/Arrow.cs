@@ -14,6 +14,8 @@ public class Arrow : MonoBehaviour {
 	Vector2 startVector;
 
 	Rigidbody2D rb;
+
+	bool useGravity = true;
 	// Use this for initialization
 	void Start () {
 
@@ -29,18 +31,20 @@ public class Arrow : MonoBehaviour {
 
 		Vector2 currentVector = transform.position;
 
-		float radius = Vector2.Distance(transform.position, worldCenter.transform.position);
-		float theta = Vector2.Angle(startVector, currentVector);
-
-		float xPos = radius * Mathf.Sin(theta) * Time.deltaTime;
-		float yPos = radius * Mathf.Cos(theta) * Time.deltaTime;
-
-
 		float directionModifier = transform.position.x >= worldCenter.transform.position.x ? -1f : 1f;
 
-		transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, directionModifier * Vector2.Angle(startVector, currentVector));
+		transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, directionModifier * Vector2.Angle(Vector2.up, currentVector));
 
-		// UseGravity();
+		// transform.position = new Vector2(xPos, yPos);
+
+	}
+
+	/// <summary>
+	/// This function is called every fixed framerate frame, if the MonoBehaviour is enabled.
+	/// </summary>
+	void FixedUpdate()
+	{
+		if (useGravity) UseGravity();
 	}
 
 	void UseGravity()
@@ -55,6 +59,19 @@ public class Arrow : MonoBehaviour {
 			// print(force);
         }
     //  }
+	}
+
+	/// <summary>
+	/// Sent when an incoming collider makes contact with this object's
+	/// collider (2D physics only).
+	/// </summary>
+	/// <param name="other">The Collision2D data associated with this collision.</param>
+	void OnCollisionEnter2D(Collision2D other)
+	{
+		rb.constraints = RigidbodyConstraints2D.FreezeAll;
+
+		useGravity = false;
+
 	}
 
 }

@@ -271,7 +271,7 @@ MonoBehaviour:
   maxGravDistance: 9.13
   moveSpeed: 5.74
   arrowRecharge: 0
-  arrowVelocity: 7.59
+  arrowVelocity: 10
   moveDirection: 0
   worldCenter: {fileID: 281053402}
 --- !u!1 &519420028

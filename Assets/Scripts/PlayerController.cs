@@ -30,10 +30,12 @@ public class PlayerController : MonoBehaviour {
 	public float arrowVelocity;
 	public float moveDirection;
 
+	bool canMove = false;
+
 	Vector2 startVector;
 	Vector2 currentVector;
 
-	bool useGravity = true;
+	// bool useGravity = true;
 
 	public GameObject worldCenter;
 
@@ -59,7 +61,7 @@ public class PlayerController : MonoBehaviour {
 		// RaycastHit2D downHit = Physics2D.Raycast(transform.position, -transform.up, 0.5f, colliderMask);
 		// print(downHit);
 
-		print(useGravity);
+		// print(useGravity);
 
 		moveDirection = player.GetAxis("Move");
 
@@ -67,7 +69,7 @@ public class PlayerController : MonoBehaviour {
 
 		directionModifier = transform.position.x >= worldCenter.transform.position.x ? -1f : 1f;
 
-		transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, directionModifier * Vector2.Angle(startVector, currentVector));
+		transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, directionModifier * Vector2.Angle(Vector2.up, currentVector));
 
 
 		/***********************
@@ -88,8 +90,10 @@ public class PlayerController : MonoBehaviour {
 		/***********************
 			MOVEMENT
 		************************/
+		if (playerTrigger.onGround) {canMove = true;}
+		else {canMove = false;}
 
-		if (player.GetButton("Move")) {
+		if (player.GetButton("Move") && canMove) {
 
 			// Vector2 right = transform.right;
 
@@ -99,25 +103,44 @@ public class PlayerController : MonoBehaviour {
 			// Debug.DrawRay(transform.position, transform.right, Color.red, 1000f);
 		}
 
-		else if (player.GetNegativeButton("Move")) {
+		else if (player.GetNegativeButton("Move") && canMove) {
+			
 			rb.velocity = transform.right * -moveSpeed;
-			// rb.velocity = Vector2.right;
-
-			// Debug.DrawRay(transform.position, transform.right, Color.red, 1000f);
+			
 		}
 
 		/***********************
 			CALLING GRAVITY
 		************************/
-		
-		if (!playerTrigger.onGround) UseGravity();
 
 		if (player.GetButtonDown("Shoot")) {
-			GameObject spawnedArrow = (GameObject) Instantiate(arrow, transform.position, Quaternion.identity);
-			spawnedArrow.GetComponent<Rigidbody2D>().velocity = transform.right * arrowVelocity;
+
+			StartCoroutine("ShootArrow");
+
 		}
 		
-		
+	}
+
+	/// <summary>
+	/// This function is called every fixed framerate frame, if the MonoBehaviour is enabled.
+	/// </summary>
+	void FixedUpdate()
+	{
+		if (!playerTrigger.onGround) UseGravity();
+	}
+
+	IEnumerator ShootArrow () {
+		GameObject spawnedArrow = (GameObject) Instantiate(arrow, transform.position, Quaternion.identity);
+		spawnedArrow.GetComponent<Rigidbody2D>().velocity = transform.right * arrowVelocity;
+		canMove = false;
+
+		yield return new WaitForSeconds(0.1f);
+
+		spawnedArrow.GetComponent<CapsuleCollider2D>().enabled = true;
+
+		yield return new WaitForSeconds(0.1f);
+
+		canMove = true;
 	}
 
 	void UseGravity()
