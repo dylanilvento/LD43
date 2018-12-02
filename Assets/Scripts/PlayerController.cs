@@ -12,7 +12,9 @@ public class PlayerController : MonoBehaviour {
 	GameObject spriteContainer;
 	SpriteRenderer sr;
 
-	public GameObject arrow;
+	Animator animator;
+
+	public GameObject rightArrow, leftArrow, sweat;
 
 	PlayerTriggerCheck playerTrigger;
 
@@ -28,7 +30,9 @@ public class PlayerController : MonoBehaviour {
 	[Range(0, 5)]
 	public float arrowRecharge;
 
-	[Range(0, 10)]
+	float arrowTimer = 0f;
+
+	[Range(0, 50)]
 	public float arrowVelocity;
 	public float moveDirection;
 
@@ -38,6 +42,8 @@ public class PlayerController : MonoBehaviour {
 
 	Vector2 startVector;
 	Vector2 currentVector;
+
+	Vector2 originalPosBeforeShake;
 
 	// bool useGravity = true;
 
@@ -52,6 +58,7 @@ public class PlayerController : MonoBehaviour {
 
 		spriteContainer = transform.GetChild(1).gameObject;
 		sr = spriteContainer.GetComponent<SpriteRenderer>();
+		animator = spriteContainer.GetComponent<Animator>();
 
 		rb = GetComponent<Rigidbody2D>();
 		startVector = transform.position;
@@ -86,6 +93,7 @@ public class PlayerController : MonoBehaviour {
 
 		if ((player.GetNegativeButtonUp("Move") || player.GetButtonUp("Move"))) {
 			rb.velocity = new Vector2(0f,0f);
+			animator.SetBool("Move", false);
 
 			if (transform.position.y > worldCenter.transform.position.y) {
 				upperHemisphere = true;
@@ -99,16 +107,18 @@ public class PlayerController : MonoBehaviour {
 
 		else if (moveDirection == 0 && playerTrigger.onGround) {
 			rb.velocity = new Vector2(0f,0f);
-			print("Zero");
+			// print("Zero");
 		}
 
 		/***********************
 			MOVEMENT
 		************************/
-		if (playerTrigger.onGround) {canMove = true;}
+		if (playerTrigger.onGround && !player.GetButton("Shoot")) {canMove = true;}
 		else {canMove = false;}
 
-		if (player.GetButton("Move") && canMove) {
+		if (player.GetButton("Move") && canMove && !player.GetButton("Shoot"))  {
+
+			animator.SetBool("Move", true);
 
 			// Vector2 right = transform.right;
 
@@ -126,7 +136,9 @@ public class PlayerController : MonoBehaviour {
 
 		}
 
-		else if (player.GetNegativeButton("Move") && canMove) {
+		else if (player.GetNegativeButton("Move") && canMove && !player.GetButton("Shoot")) {
+
+			animator.SetBool("Move", true);
 			
 			if (upperHemisphere) {
 				rb.velocity = transform.right * -moveSpeed;
@@ -143,13 +155,67 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		/***********************
-			CALLING GRAVITY
+			SHOOTING ARROWS
+			FREEZE MOVEMENT ON GROUND CHECK ^
 		************************/
 
-		if (player.GetButtonDown("Shoot")) {
+		if (player.GetButton("Shoot")) {
 
-			StartCoroutine("ShootArrow");
+			// canMove = false;
 
+			// print(arrowTimer);
+
+			// StartCoroutine("ShootArrow");
+			arrowTimer += Time.deltaTime;
+
+			if (arrowTimer < 0.5f) {
+				animator.SetBool("Shoot1", true);
+				// animator.SetBool("Move", false);
+			}
+
+			else if (arrowTimer >= 0.5f && arrowTimer < 1.5f) {
+				animator.SetBool("Shoot2", true);
+				animator.SetBool("Shoot1", false);
+			}
+
+			else if (arrowTimer >= 1.5f && arrowTimer < 2.5f) {
+				animator.SetBool("Shoot3", true);
+				animator.SetBool("Shoot2", false);
+			}
+
+			else if (arrowTimer >= 2.5f && arrowTimer <= 3.5f) {
+				animator.SetBool("Shoot4", true);
+				animator.SetBool("Shoot3", false);
+			}
+
+			else if (arrowTimer >= 3.5f) {
+				originalPosBeforeShake = transform.position;
+				Shake();
+			}
+
+			//do Shoots 1 through 4.
+
+		}
+
+		if (player.GetButtonUp("Shoot")) {
+			arrowTimer = 0f;
+
+			animator.SetBool("Shoot1", false);
+			animator.SetBool("Shoot2", false);
+			animator.SetBool("Shoot3", false);
+			animator.SetBool("Shoot4", false);
+
+
+			if (spriteContainer.transform.localScale.x > 0) {
+			
+				StartCoroutine(ShootArrow(rightArrow, 1f));
+			}
+
+			else if (spriteContainer.transform.localScale.x < 0) {
+				
+				StartCoroutine(ShootArrow(leftArrow, -1f));
+
+			}
 		}
 		
 	}
@@ -162,16 +228,36 @@ public class PlayerController : MonoBehaviour {
 		if (!playerTrigger.onGround) UseGravity();
 	}
 
-	IEnumerator ShootArrow () {
-		GameObject spawnedArrow = (GameObject) Instantiate(arrow, transform.position, Quaternion.identity);
-	
-		if (spriteContainer.transform.localScale.x > 0) {
-			spawnedArrow.GetComponent<Rigidbody2D>().velocity = transform.right * arrowVelocity;
-		}
+	void Shake () {
+		
+		float magnitude = 0.01f;
+    
+		float damper = 1.0f - UnityEngine.Random.value;
+		
+		float x = UnityEngine.Random.value * 2.0f - 1.0f;
+		float y = UnityEngine.Random.value * 2.0f - 1.0f;
+		x *= magnitude * damper;
+		y *= magnitude * damper;
+		
+		transform.position = new Vector2(originalPosBeforeShake.x + x, originalPosBeforeShake.y + y);
 
-		else if (spriteContainer.transform.localScale.x < 0) {
-			spawnedArrow.GetComponent<Rigidbody2D>().velocity = -transform.right * arrowVelocity;
+		if (UnityEngine.Random.Range(0f, 1f) > 0.65f) {
+			GameObject spawnedSweat = (GameObject) Instantiate(sweat, transform.position + (transform.up/3),Quaternion.identity);
+			spawnedSweat.GetComponent<Rigidbody2D>().velocity = new Vector2(UnityEngine.Random.Range(-transform.right.x * 4f, transform.right.x * 4f), UnityEngine.Random.Range(transform.up.y/2f, transform.up.y));
+			UnityEngine.Object.Destroy(spawnedSweat, UnityEngine.Random.Range(0.1f, 0.5f));
 		}
+		
+	            
+	}
+
+	IEnumerator ShootArrow (GameObject arrowInstantiatedObject, float velocityModifier) {
+
+
+		GameObject spawnedArrow = (GameObject) Instantiate(arrowInstantiatedObject, transform.position, Quaternion.identity);
+			
+		spawnedArrow.GetComponent<Rigidbody2D>().velocity = transform.right * arrowVelocity * velocityModifier;
+		
+		// spawnedArrow.transform.GetChild(0).localScale = new Vector2(-1, 1);
 
 		canMove = false;
 

@@ -115,7 +115,7 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 19
+        width: 20
         height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -124,7 +124,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5f88c0f8ee8b64a899e9a119e34f60ce
+      spriteID: 8334fd245b06840d99517fb40f091db8
       vertices: []
       indices: 
       edges: []
@@ -133,9 +133,9 @@ TextureImporter:
       name: Player_1
       rect:
         serializedVersion: 2
-        x: 19
+        x: 20
         y: 0
-        width: 19
+        width: 20
         height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -144,7 +144,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c56a74158cf204594a0c544f5772a924
+      spriteID: b565bbc49f3a74411b72d83131ee7ec8
       vertices: []
       indices: 
       edges: []
@@ -153,9 +153,9 @@ TextureImporter:
       name: Player_2
       rect:
         serializedVersion: 2
-        x: 38
+        x: 40
         y: 0
-        width: 19
+        width: 20
         height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -164,7 +164,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 90b5703ea608248dea8221300c488040
+      spriteID: dbc41e86b2f3e481ea0660009d16b068
       vertices: []
       indices: 
       edges: []
@@ -173,9 +173,9 @@ TextureImporter:
       name: Player_3
       rect:
         serializedVersion: 2
-        x: 57
+        x: 60
         y: 0
-        width: 19
+        width: 20
         height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -184,7 +184,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f16ac98a6bd39492c89cb05ece19c4ae
+      spriteID: 2acb0b826745644f48b391a7a767d972
       vertices: []
       indices: 
       edges: []
@@ -193,9 +193,9 @@ TextureImporter:
       name: Player_4
       rect:
         serializedVersion: 2
-        x: 76
+        x: 80
         y: 0
-        width: 19
+        width: 20
         height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -204,7 +204,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 54aecc03d4f434142b043fd33e60f3c6
+      spriteID: 9ef3c3fe723ec4c0caee9bbdfedf3ec3
       vertices: []
       indices: 
       edges: []
@@ -213,9 +213,9 @@ TextureImporter:
       name: Player_5
       rect:
         serializedVersion: 2
-        x: 95
+        x: 100
         y: 0
-        width: 19
+        width: 20
         height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -224,7 +224,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8dbe2d891c8a345e7a00d93defea82f5
+      spriteID: fa0dfb9c04a254c0882428232909fbc2
       vertices: []
       indices: 
       edges: []
@@ -233,9 +233,9 @@ TextureImporter:
       name: Player_6
       rect:
         serializedVersion: 2
-        x: 114
+        x: 120
         y: 0
-        width: 19
+        width: 20
         height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -244,7 +244,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: af6f363fd07604d0eb2d5e2e4a88e5e2
+      spriteID: 4f32b4a83b68d4e9aa209786285ea817
       vertices: []
       indices: 
       edges: []
@@ -253,9 +253,9 @@ TextureImporter:
       name: Player_7
       rect:
         serializedVersion: 2
-        x: 133
+        x: 140
         y: 0
-        width: 19
+        width: 20
         height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -264,7 +264,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 07c1770d012834037a654fe625377754
+      spriteID: 317738d6e1b09431eacdda975f3547ac
       vertices: []
       indices: 
       edges: []
@@ -273,9 +273,9 @@ TextureImporter:
       name: Player_8
       rect:
         serializedVersion: 2
-        x: 152
+        x: 160
         y: 0
-        width: 19
+        width: 20
         height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -284,7 +284,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 32ae18fe2e23e46b4862bf49b5a60545
+      spriteID: 1ba1cd9af30c04e26936f274b5c6ef4f
       vertices: []
       indices: 
       edges: []
@@ -293,9 +293,9 @@ TextureImporter:
       name: Player_9
       rect:
         serializedVersion: 2
-        x: 171
+        x: 180
         y: 0
-        width: 19
+        width: 20
         height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -304,7 +304,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6c47b3b550d57439681b1790abd4d0fa
+      spriteID: d2dab4ec47d0940c39a5aae35337fdf8
       vertices: []
       indices: 
       edges: []
@@ -313,9 +313,9 @@ TextureImporter:
       name: Player_10
       rect:
         serializedVersion: 2
-        x: 190
+        x: 200
         y: 0
-        width: 19
+        width: 20
         height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -324,7 +324,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1b96b536508ba427badd8d67fb3be7ad
+      spriteID: ffd3fa31d0fa04c5d9692d313342cf75
       vertices: []
       indices: 
       edges: []
@@ -333,9 +333,9 @@ TextureImporter:
       name: Player_11
       rect:
         serializedVersion: 2
-        x: 209
+        x: 220
         y: 0
-        width: 19
+        width: 20
         height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -344,7 +344,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b89ad1baca0a6432ab253684aac6caaf
+      spriteID: 675b437f2609c417bb17e767d8cc3c17
       vertices: []
       indices: 
       edges: []
@@ -353,9 +353,9 @@ TextureImporter:
       name: Player_12
       rect:
         serializedVersion: 2
-        x: 228
+        x: 240
         y: 0
-        width: 19
+        width: 20
         height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -364,7 +364,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0b9368664e93a4934931f997074fa1ac
+      spriteID: 38abd942ca03a428f85e91dfcde618fa
       vertices: []
       indices: 
       edges: []
@@ -373,9 +373,9 @@ TextureImporter:
       name: Player_13
       rect:
         serializedVersion: 2
-        x: 247
+        x: 260
         y: 0
-        width: 19
+        width: 20
         height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -384,7 +384,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1f888703dc2074d2a859828f010adc9d
+      spriteID: fd7e09d2baaaf4ffaa4b9ef2364bb4c1
       vertices: []
       indices: 
       edges: []
@@ -393,9 +393,9 @@ TextureImporter:
       name: Player_14
       rect:
         serializedVersion: 2
-        x: 266
+        x: 280
         y: 0
-        width: 19
+        width: 20
         height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -404,7 +404,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 89074a630bddc41b099e22862b564692
+      spriteID: 4a114de15e0e8422f939e1bdc71f604d
       vertices: []
       indices: 
       edges: []
