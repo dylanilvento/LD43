@@ -15,7 +15,7 @@ public class Arrow : MonoBehaviour {
 
 	Rigidbody2D rb;
 
-	bool useGravity = true;
+	bool useGravity = false;
 	// Use this for initialization
 	void Start () {
 
@@ -47,6 +47,10 @@ public class Arrow : MonoBehaviour {
 		if (useGravity) UseGravity();
 	}
 
+	public void SetUseGravity (bool val) {
+		useGravity = val;
+	}
+
 	void UseGravity()
 	{
 		// for(var planet : GameObject in planets) {
@@ -71,6 +75,8 @@ public class Arrow : MonoBehaviour {
 		rb.constraints = RigidbodyConstraints2D.FreezeAll;
 
 		useGravity = false;
+
+		Destroy(gameObject);
 
 	}
 

@@ -21,8 +21,8 @@ public class PlayerController : MonoBehaviour {
 	[Range(0, 50)]
 	public float maxGravity;
 
-	[Range(0, 10)]
-	public float maxGravDistance;
+	// [Range(0, 10)]
+	float maxGravDistance = 100f;
 
 	[Range(0, 10)]
 	public float moveSpeed;
@@ -48,6 +48,12 @@ public class PlayerController : MonoBehaviour {
 	// bool useGravity = true;
 
 	public GameObject worldCenter;
+
+	GameObject spawnedArrow;
+	Vector2 spawnedArrowVelocity;
+	bool arrowSpawned = false;
+
+	float[] level2ArrowVelocities = {8f, 9.711f, 10f, 11f};
 
 	float directionModifier = 1f;
 
@@ -161,6 +167,27 @@ public class PlayerController : MonoBehaviour {
 
 		if (player.GetButton("Shoot")) {
 
+			
+
+			if (spriteContainer.transform.localScale.x > 0 && !arrowSpawned) {
+				arrowSpawned = true;
+				// spawnedArrow = (GameObject) Instantiate(rightArrow, transform.position, Quaternion.identity);
+				spawnedArrow = (GameObject) Instantiate(rightArrow, transform.position, Quaternion.identity);
+
+				print(arrowSpawned);
+				// StartCoroutine(ShootArrow(rightArrow, 1f));
+			}
+
+			else if (spriteContainer.transform.localScale.x < 0 && !arrowSpawned) {
+				arrowSpawned = true;
+
+				spawnedArrow = (GameObject) Instantiate(leftArrow, transform.position, Quaternion.identity);
+				
+				print(arrowSpawned);
+				// StartCoroutine(ShootArrow(leftArrow, -1f));
+
+			}
+
 			// canMove = false;
 
 			// print(arrowTimer);
@@ -170,26 +197,31 @@ public class PlayerController : MonoBehaviour {
 
 			if (arrowTimer < 0.5f) {
 				animator.SetBool("Shoot1", true);
+				arrowVelocity = level2ArrowVelocities[0];
+				originalPosBeforeShake = transform.position;
 				// animator.SetBool("Move", false);
 			}
 
 			else if (arrowTimer >= 0.5f && arrowTimer < 1.5f) {
 				animator.SetBool("Shoot2", true);
 				animator.SetBool("Shoot1", false);
+				arrowVelocity = level2ArrowVelocities[1];
 			}
 
 			else if (arrowTimer >= 1.5f && arrowTimer < 2.5f) {
 				animator.SetBool("Shoot3", true);
 				animator.SetBool("Shoot2", false);
+				arrowVelocity = level2ArrowVelocities[2];
 			}
 
 			else if (arrowTimer >= 2.5f && arrowTimer <= 3.5f) {
 				animator.SetBool("Shoot4", true);
 				animator.SetBool("Shoot3", false);
+				arrowVelocity = level2ArrowVelocities[3];
 			}
 
 			else if (arrowTimer >= 3.5f) {
-				originalPosBeforeShake = transform.position;
+				// originalPosBeforeShake = transform.position;	
 				Shake();
 			}
 
@@ -208,12 +240,12 @@ public class PlayerController : MonoBehaviour {
 
 			if (spriteContainer.transform.localScale.x > 0) {
 			
-				StartCoroutine(ShootArrow(rightArrow, 1f));
+				StartCoroutine(ShootArrow(1f));
 			}
 
 			else if (spriteContainer.transform.localScale.x < 0) {
 				
-				StartCoroutine(ShootArrow(leftArrow, -1f));
+				StartCoroutine(ShootArrow(-1f));
 
 			}
 		}
@@ -250,10 +282,12 @@ public class PlayerController : MonoBehaviour {
 	            
 	}
 
-	IEnumerator ShootArrow (GameObject arrowInstantiatedObject, float velocityModifier) {
+	IEnumerator ShootArrow (float velocityModifier) {
 
 
-		GameObject spawnedArrow = (GameObject) Instantiate(arrowInstantiatedObject, transform.position, Quaternion.identity);
+		// spawnedArrow = null;
+		arrowSpawned = false;
+		spawnedArrow.GetComponent<Arrow>().SetUseGravity(true);
 			
 		spawnedArrow.GetComponent<Rigidbody2D>().velocity = transform.right * arrowVelocity * velocityModifier;
 		

@@ -34,5 +34,10 @@ public class PlayerTriggerCheck : MonoBehaviour {
 		onGround = false;
 	}
 
+	void OnTriggerStay2D(Collider2D other)
+	{
+		onGround = true;
+	}
+
 	
 }
