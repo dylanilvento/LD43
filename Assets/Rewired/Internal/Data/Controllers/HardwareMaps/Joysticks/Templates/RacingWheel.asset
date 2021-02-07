@@ -840,6 +840,22 @@ MonoBehaviour:
       joystickId: 32
       joystickId2: 0
       splitAxis: 0
+    - templateId: 39
+      joystickId: 18
+      joystickId2: 0
+      splitAxis: 0
+    - templateId: 40
+      joystickId: 19
+      joystickId2: 0
+      splitAxis: 0
+    - templateId: 41
+      joystickId: 20
+      joystickId2: 0
+      splitAxis: 0
+    - templateId: 42
+      joystickId: 21
+      joystickId2: 0
+      splitAxis: 0
   - id: 12
     name: Logitech G920
     joystickGuid: 0f5ba315-3e83-4237-8374-28bea596914d
@@ -2023,8 +2039,89 @@ MonoBehaviour:
       joystickId: 17
       joystickId2: 0
       splitAxis: 0
+  - id: 18
+    name: Sony PS4 Steering Wheel
+    joystickGuid: 1b5a521b-6833-4c54-ab6c-bac653c93e9c
+    fileGuid: 973630cd12acc694a9d661dd9c3c53e2
+    elementIdentifierMappings:
+    - templateId: 0
+      joystickId: 0
+      joystickId2: 0
+      splitAxis: 0
+    - templateId: 1
+      joystickId: 2
+      joystickId2: 0
+      splitAxis: 0
+    - templateId: 2
+      joystickId: 3
+      joystickId2: 0
+      splitAxis: 0
+    - templateId: 3
+      joystickId: 4
+      joystickId2: 0
+      splitAxis: 0
+    - templateId: 6
+      joystickId: 13
+      joystickId2: 0
+      splitAxis: 0
+    - templateId: 7
+      joystickId: 14
+      joystickId2: 0
+      splitAxis: 0
+    - templateId: 8
+      joystickId: 15
+      joystickId2: 0
+      splitAxis: 0
+    - templateId: 9
+      joystickId: 16
+      joystickId2: 0
+      splitAxis: 0
+    - templateId: 10
+      joystickId: 17
+      joystickId2: 0
+      splitAxis: 0
+    - templateId: 11
+      joystickId: 18
+      joystickId2: 0
+      splitAxis: 0
+    - templateId: 12
+      joystickId: 11
+      joystickId2: 0
+      splitAxis: 0
+    - templateId: 13
+      joystickId: 12
+      joystickId2: 0
+      splitAxis: 0
+    - templateId: 14
+      joystickId: 23
+      joystickId2: 0
+      splitAxis: 0
+    - templateId: 15
+      joystickId: 24
+      joystickId2: 0
+      splitAxis: 0
+    - templateId: 39
+      joystickId: 25
+      joystickId2: 0
+      splitAxis: 0
+    - templateId: 40
+      joystickId: 26
+      joystickId2: 0
+      splitAxis: 0
+    - templateId: 41
+      joystickId: 27
+      joystickId2: 0
+      splitAxis: 0
+    - templateId: 42
+      joystickId: 28
+      joystickId2: 0
+      splitAxis: 0
+    - templateId: 37
+      joystickId: 20
+      joystickId2: 0
+      splitAxis: 0
   specialElements:
   - elementIdentifierId: 45
     data: '{"eid_up":39,"eid_right":40,"eid_down":41,"eid_left":42,"eid_press":-1}'
   elementIdentifierIdCounter: 46
-  joystickIdCounter: 18
+  joystickIdCounter: 19

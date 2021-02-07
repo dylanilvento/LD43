@@ -14,7 +14,6 @@ MonoBehaviour:
   controllerName: Flight Pedals
   description: 
   templateGuid: f6fe76f8-be2a-4db2-b853-9e3652075913
-  templateType: 4
   className: FlightPedalsTemplate
   elementIdentifiers:
   - _id: 0
@@ -23,21 +22,30 @@ MonoBehaviour:
     _negativeName: 
     _elementType: 0
     _scriptingName: leftPedal
+    _alternateScriptingName: 
     _excludeFromExport: 0
+    _useEditorElementTypeOverride: 0
+    _editorElementTypeOverride: 0
   - _id: 1
     _name: Right Pedal
     _positiveName: 
     _negativeName: 
     _elementType: 0
     _scriptingName: rightPedal
+    _alternateScriptingName: 
     _excludeFromExport: 0
+    _useEditorElementTypeOverride: 0
+    _editorElementTypeOverride: 0
   - _id: 2
     _name: Slide
     _positiveName: 
     _negativeName: 
     _elementType: 0
     _scriptingName: slide
+    _alternateScriptingName: 
     _excludeFromExport: 0
+    _useEditorElementTypeOverride: 0
+    _editorElementTypeOverride: 0
   joysticks:
   - id: 0
     name: CH Pro Pedals
@@ -124,6 +132,23 @@ MonoBehaviour:
       joystickId: 27
       joystickId2: 0
       splitAxis: 0
+  - id: 5
+    name: Sony PS4 Flight Stick
+    joystickGuid: a75d195b-27a8-41ac-97db-2bd5a649a817
+    fileGuid: 22d64389a3ac78245a2d54f8ae889fb3
+    elementIdentifierMappings:
+    - templateId: 0
+      joystickId: 11
+      joystickId2: 0
+      splitAxis: 0
+    - templateId: 1
+      joystickId: 12
+      joystickId2: 0
+      splitAxis: 0
+    - templateId: 2
+      joystickId: 10
+      joystickId2: 0
+      splitAxis: 0
   specialElements: []
   elementIdentifierIdCounter: 3
-  joystickIdCounter: 5
+  joystickIdCounter: 6
